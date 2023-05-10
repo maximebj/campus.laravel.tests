@@ -7,11 +7,8 @@ use Tests\TestCase;
 
 class ProjectTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
+    
     public function test_project_url()
     {
         $response = $this->get('/projects');
