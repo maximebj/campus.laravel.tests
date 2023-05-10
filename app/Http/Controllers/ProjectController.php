@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use App\Models\Project;
 
-class ProjectController extends BaseController
+class ProjectController extends Controller
 {
-  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
   public function index()
   {
-    return view('projects');
+    $projects = Project::orderBy('created_at', 'desc')->get();
+
+    return view('projects', [
+      'projects' => $projects
+    ]);
+  }
+
+  public function show($id)
+  {
+    $project = Project::find($id);
+    
+    return view('project', [
+      'project' => $project
+    ]);
   }
 }
